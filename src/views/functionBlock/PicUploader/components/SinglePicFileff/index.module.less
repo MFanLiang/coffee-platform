@@ -1,0 +1,219 @@
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.uploadContainer {
+
+  /* 滚动条整体部分 */
+  &::-webkit-scrollbar {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    width: 8px;
+  }
+
+  /* 滚动条外层轨道 */
+  &::-webkit-scrollbar-track {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: rgb(230, 230, 230);
+  }
+
+  /* 滚动条可拖拽滑块 */
+  &::-webkit-scrollbar-thumb {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    background-color: rgb(194, 194, 194);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(177, 177, 177);
+  }
+
+  .simgleBody {
+    display: flex;
+    gap: 15px;
+
+    .change_photo_btn {
+      box-shadow: 0px 0px 8px rgb(22, 144, 250, .6);
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 56px;
+      height: 90px;
+      border-radius: 12px;
+      border: 1px dotted rgb(22, 144, 250, 1);
+      transition: all .3s ease-in-out 0s;
+      cursor: pointer;
+
+      .increment {
+        transition: all .3s ease-in-out 0s;
+        font-size: 17px;
+        font-weight: 600;
+        transform: rotate(45deg);
+        color: rgb(22, 144, 250);
+      }
+
+      &:hover {
+        .increment {
+          color: #fff;
+        }
+
+        background-color: rgba(22, 144, 250, .4);
+      }
+    }
+
+    .simgleViewCircle {
+      position: relative;
+      font-size: 13px;
+      user-select: none;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 8px rgb(22, 144, 250, .6);
+      overflow: hidden;
+      text-align: center;
+
+      &:hover .mark {
+        display: flex;
+      }
+
+      .noImg {
+        text-align: center;
+        line-height: 90px;
+        color: rgb(22, 144, 250, 1);
+      }
+
+      .simgleViewImg {
+        width: 100%;
+        height: 100%;
+        animation: App-logo-spin infinite 20s linear;
+      }
+
+      .mark {
+        display: none;
+        align-items: center;
+        justify-content: space-around;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.36);
+
+        .iconUpload {
+          font-size: 13px;
+        }
+
+        .iconPlay,
+        .iconkuodaView,
+        .iconUpload {
+          color: rgb(186, 186, 186);
+          cursor: pointer;
+
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    .imgViewInfo {
+      box-sizing: border-box;
+      font-size: 13px;
+      width: 172px;
+      box-shadow: 0px 0px 8px rgb(22, 144, 250, .6);
+      height: 90px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 8px;
+
+      .noInfo {
+        text-align: center;
+        line-height: 90px;
+        color: rgb(22, 144, 250, 1);
+      }
+
+      .itemdesc {
+        margin: 0px 3px;
+        padding: 5px;
+      }
+
+      .itemdesc:not(:last-child) {
+        border-bottom: 1px solid gray;
+      }
+    }
+  }
+
+  .article {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-radius: 8px;
+    height: 265px;
+    overflow-y: auto;
+    box-shadow: 0px 0px 8px rgb(22, 144, 250, .6);
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    .darImgCon {
+      width: 130px;
+      height: 120px;
+      margin-bottom: 5px;
+      border: 1px solid #80808036;
+      border-radius: 8px;
+      position: relative;
+
+      background: linear-gradient(45deg,
+          rgba(0, 0, 0, 0.1) 25%,
+          transparent 25%,
+          transparent 75%,
+          rgba(0, 0, 0, 0.1) 75%,
+          rgba(0, 0, 0, 0.1) 100%),
+        linear-gradient(45deg,
+          rgba(0, 0, 0, 0.1) 25%,
+          transparent 25%,
+          transparent 75%,
+          rgba(0, 0, 0, 0.1) 75%,
+          rgba(0, 0, 0, 0.1) 100%);
+      background-size: 10px 10px;
+      background-position: 0 0, 5px 5px;
+
+      .imgshili {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      &:hover>.mark {
+        display: flex;
+      }
+
+      .mark {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 130px;
+        height: 120px;
+        background-color: rgba(0, 0, 0, .2);
+        border-radius: 8px;
+
+        .iconkuodaView {
+          color: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
