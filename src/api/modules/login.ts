@@ -23,7 +23,7 @@ const getAuthorButtons = () => {
 
 // * 获取菜单列表
 const getMenuList = () => {
-	return server.get(`${PORT1}/menu/list`, {}, { headers: { noLoading: false } });
+	return server.get<any>(`${PORT1}/menu/list`, {}, { headers: { noLoading: false } });
 };
 
 export {
