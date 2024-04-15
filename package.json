@@ -93,6 +93,5 @@
     "commitizen": {
       "path": "node_modules/cz-git"
     }
-  },
-  "type": "module"
+  }
 }
