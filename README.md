@@ -12,9 +12,9 @@
 
 - 项目现阶段出现的问题: [BUGSLOG.md](BUGSLOG.md)
 
-### 一、在线预览地址 👀
+### 一、在线预览地址（需要在电脑端访问哦） 👀
 
-- Link：http://116.63.42.17:8080
+- Link：http://116.63.42.17
 
 ### 二、Git 仓库地址 (欢迎 Star⭐)
 
@@ -22,7 +22,7 @@
 
 ### 三、🔨🔨🔨 项目功能
 
-- 🚀 采用最新技术找开发：React18、React-Router v6、React-Hooks、TypeScript、Vite2
+- 🚀 采用最新技术找开发：React18、React-Router v6、React-Hooks、TypeScript V5、Vite V5、Antd V4.22.2
 - 🚀 采用 Vite2 作为项目开发、打包工具（配置了 Gzip 打包、跨域代理、打包预览工具…）
 - 🚀 整个项目集成了 TypeScript （完全是为了想学习 🤣）
 - 🚀 使用 redux 做状态管理，集成 immer、react-redux、redux-persist 开发
@@ -174,7 +174,7 @@ Hooks-Admin
 项目后台接口完全采用 nodejs 接口数据：
 
 - Koa-server：https://github.com/MFanLiang/EspressoKoaServer
-- Swagger UI：http://116.63.42.17/swagger
+- Swagger UI：https://116.63.42.17/swagger-ui
 - **Clone：**
 
 ```text
