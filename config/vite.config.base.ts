@@ -13,6 +13,7 @@ const baseConfig = (mode: any) => {
   const viteEnv = wrapperEnv(env);
 
   return defineConfig({
+    base: './',
     // * alias config
     resolve: {
       alias: [

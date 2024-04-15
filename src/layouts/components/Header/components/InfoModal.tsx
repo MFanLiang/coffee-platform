@@ -1,11 +1,10 @@
 import { useState, useImperativeHandle, Ref } from "react";
 import { Modal, message, Badge, Descriptions, Avatar, Tag } from "antd";
 import defaultAvatar from "@/assets/images/avatar.png";
-import type { userInfoType } from "@/redux/interface/index";
 
 interface Props {
 	innerRef: Ref<{ showModal: (params: any) => void } | undefined>;
-	userInfoData: userInfoType | null;
+	userInfoData: any;
 }
 
 const InfoModal = (props: Props) => {

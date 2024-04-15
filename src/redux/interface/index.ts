@@ -2,51 +2,63 @@ import type { SizeType } from "antd/lib/config-provider/SizeContext";
 
 /* themeConfigProp */
 export interface ThemeConfigProp {
+	/** 系统主题颜色，默认值 天蓝色 */
 	primary: string;
+	/** 系统是否为深色模式 */
 	isDark: boolean;
+	/** 色弱模式(weak) || 灰色模式(gray) */
 	weakOrGray: string;
+	/** 是否启用面包屑导航 */
 	breadcrumb: boolean;
+	/** 是否启用 tabs 标签栏 */
 	tabs: boolean;
+	/** 是否启用底部系统版权信息 */
 	footer: boolean;
 }
 
-/** userInfoState */
-export interface userInfoType {
-	/** 用户唯一标识ID */
-	id: string;
-	/** 用户头像地址 */
-	avatar: string;
-	/** 用户名称 */
-	username: string;
-	/** 用户全名 */
-	userFullName: string;
-	/** 用户手机号码 */
-	tel: string;
-	/** 用户角色 */
-	userRole: number;
-	/** 用户状态[激活，注销] */
-	status: boolean;
+/** global State Types */
+export interface GlobalState {
+	/** 用户鉴权 token 值 */
+	token: string;
+	/** 用户基本信息 */
+	userInfo: any;
+	/** 系统尺寸 */
+	assemblySize: SizeType;
+	/** 系统语言 */
+	language: string;
+	/** 系统主题配置 */
+	themeConfig: ThemeConfigProp;
 }
 
-/* GlobalState */
-export interface GlobalState {
-	token: string;
-	userInfo: null | userInfoType;
-	assemblySize: SizeType;
-	language: string;
-	themeConfig: ThemeConfigProp;
+/** userInfo Types */
+export interface userInfoType {
+	username: string;
+	id: string;
+	status: boolean;
+	avatar: string;
+	tel: string;
 }
 
 /* MenuState */
 export interface MenuState {
 	isCollapse: boolean;
 	menuList: Menu.MenuOptions[];
+	currentClickKey?: string;
+	submenu?: string[];
 }
 
 /* TabsState */
 export interface TabsState {
 	tabsActive: string;
 	tabsList: Menu.MenuOptions[];
+}
+
+/* AuthState */
+export interface AuthState {
+	authButtons: {
+		[propName: string]: any;
+	};
+	authRouter: string[];
 }
 
 /* BreadcrumbState */
@@ -56,10 +68,23 @@ export interface BreadcrumbState {
 	};
 }
 
-/* AuthState */
-export interface AuthState {
-	authButtons: {
-		[propName: string]: any;
-	};
-	authRouter: string[];
+/* studyReact */
+export interface StudyReactState {
+	/** tabs 激活的项 */
+	tabsActiveKey: string;
+
+	/** 图片上传类型 【single 单一图片文件】【multiple 多个图片文件】 */
+	picUploadType: 'single' | 'multiple';
+}
+
+/* picSelector */
+export interface PicStateType {
+	/** 页面是否为首次加载，true:页面刷新; false:首次加载 */
+	isOnload: boolean;
+	/** 文本编辑器值 */
+	editorValue: string,
+	/** 文本大小调节 */
+	textSize: string;
+	/** 文本颜色色值 */
+	textColorValue: string;
 }

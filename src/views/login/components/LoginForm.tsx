@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Login } from "@/api/interface";
-import { loginApi } from "@/api/modules/login";
+import { reqLogin } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
 import { setToken, setUserInfo } from "@/redux/modules/global/action";
@@ -23,7 +23,7 @@ const LoginForm = (props: any) => {
 		try {
 			setLoading(true);
 			// ************** loginForm.password = md5(loginForm.password); // md5加密方式，待完善，之后会搞成密文 http 通信传输
-			const res = await loginApi(loginForm);
+			const res = await reqLogin(loginForm);
 			if (res.code !== 200) {
 				setTabsList([]);
 				message.error(res.message);
@@ -38,19 +38,6 @@ const LoginForm = (props: any) => {
 			setLoading(false);
 		}
 	};
-	// const onFinish = async (loginForm: Login.ReqLoginForm) => {
-	// 	try {
-	// 		setLoading(true);
-	// 		loginForm.password = md5(loginForm.password);
-	// 		const { data } = await loginApi(loginForm);
-	// 		setToken(data?.access_token);
-	// 		setTabsList([]);
-	// 		message.success("登录成功！");
-	// 		navigate(HOME_URL);
-	// 	} finally {
-	// 		setLoading(false);
-	// 	}
-	// };
 
 	const onFinishFailed = (errorInfo: any) => {
 		console.log("Failed:", errorInfo);

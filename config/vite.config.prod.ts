@@ -19,7 +19,7 @@ const prodConfiguration = (mode: any) => {
       // * build configure
       build: {
         // 浏览器兼容目标
-        target: 'es2015',
+        target: 'ES2020',
         // 指定生成静态资源的存放路径
         asssetsDir: 'dist',
         // 构建后将会生成 .vite/manifest.json 文件，可为一些服务器框架渲染时提供正确的资源引入链接

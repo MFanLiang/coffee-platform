@@ -1,0 +1,234 @@
+// ************** top ***********************
+
+// * 从上往下进入页面
+@keyframes top {
+  0% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    /* Safari */
+    -webkit-transform: translateY(0px);
+    /* 标准语法 */
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+// * 从下往上离开页面
+@keyframes topOut {
+  0% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+}
+
+// **************** bottom *********************
+
+// * 从下往上进入页面
+@keyframes bottom {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+// * 从上往下离开页面
+@keyframes bottomOut {
+  0% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+// **************** left *********************
+
+// * 从左往右进入页面
+@keyframes left {
+  0% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+// * 从右往左离开页面
+@keyframes leftOut {
+  0% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateX(-100px);
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+
+// **************** right *********************
+
+// * 从右往左进入页面
+@keyframes right {
+  0% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+// * 从左往右离开页面
+@keyframes rightOut {
+  0% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: translateX(100px);
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+
+// ***************** rotateY ********************
+
+// * Y轴翻转进入页面
+@keyframes rotateY {
+  0% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: rotateY(180deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: rotateY(360deg);
+    opacity: 1;
+  }
+}
+
+// * Y轴翻转离开页面
+@keyframes rotateYOut {
+  0% {
+    transform: rotateY(360deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: rotateY(180deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+}
+
+// ***************** rotateX ********************
+
+// * X轴翻转进入页面
+@keyframes rotateX {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: rotateX(180deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: rotateX(360deg);
+    opacity: 1;
+  }
+}
+
+// * X轴翻转离开页面
+@keyframes rotateXOut {
+  0% {
+    transform: rotateX(360deg);
+    opacity: 1;
+  }
+
+  50% {
+    transform: rotateX(180deg);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    opacity: 0;
+  }
+}
+
+// ***************** scale ********************
+
+// * 放大进入页面
+@keyframes scale {
+  0% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// * 缩小离开页面
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.2);
+    opacity: 0;
+    transition: all .3s ease-in-out;
+  }
+}
