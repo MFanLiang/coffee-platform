@@ -1,7 +1,7 @@
 import { Login } from "@/api/interface/index";
 import { PORT1 } from "@/api/config/servicePort";
 import server from '@/api';
-import type { loginFormType, loginResponseData } from '../interface/loginTypes';
+import type { loginFormType } from '../interface/loginTypes';
 
 /**
  * @name 获取公钥接口

@@ -23,7 +23,6 @@ const AuthRouter = (props: { children: JSX.Element }) => {
 	// * 判断是否有Token
 	const token = store.getState().global.token;
 	if (!token) {
-		message.error("您的登录已过期，请重新登录！")
 		return <Navigate to="/login" replace />
 	};
 
