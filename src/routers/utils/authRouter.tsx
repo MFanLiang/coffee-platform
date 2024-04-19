@@ -1,4 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
+import { message } from 'antd';
 import { AxiosCanceler } from "@/api/helper/axiosCancel";
 import { searchRoute } from "@/utils/util";
 import { rootRouter } from "@/routers/index";
@@ -21,7 +22,10 @@ const AuthRouter = (props: { children: JSX.Element }) => {
 
 	// * 判断是否有Token
 	const token = store.getState().global.token;
-	if (!token) return <Navigate to="/login" replace />;
+	if (!token) {
+		message.error("您的登录已过期，请重新登录！")
+		return <Navigate to="/login" replace />
+	};
 
 	// * Dynamic Router(动态路由，根据后端返回的菜单数据生成的一维数组)
 	const dynamicRouter = store.getState().auth.authRouter;

@@ -17,8 +17,10 @@ const LayoutIndex = (props: any) => {
 
 	// 获取按钮权限列表
 	const getAuthButtonsList = async () => {
-		const { data } = await getAuthorButtons();
-		setAuthButtons(data);
+		const response = await getAuthorButtons();
+		if (response.code === 200) {
+			setAuthButtons(response.data);
+		}
 	};
 
 	// 监听窗口大小变化

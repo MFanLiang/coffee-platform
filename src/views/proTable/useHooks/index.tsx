@@ -10,7 +10,7 @@ const UseHooks = () => {
 	const { RangePicker } = DatePicker;
 
 	useEffect(() => {
-		console.log(BUTTONS);
+		console.log('BUTTONS :>>', BUTTONS);
 	}, []);
 
 	const dataSource = [
@@ -67,6 +67,7 @@ const UseHooks = () => {
 			width: "50%"
 		}
 	];
+	
 	return (
 		<div className="card content-box">
 			<div className="date">
