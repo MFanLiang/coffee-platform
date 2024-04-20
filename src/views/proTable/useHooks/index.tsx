@@ -10,7 +10,7 @@ const UseHooks = () => {
 	const { RangePicker } = DatePicker;
 
 	useEffect(() => {
-		console.log(BUTTONS);
+		console.log('BUTTONS :>>', BUTTONS);
 	}, []);
 
 	const dataSource = [
@@ -67,6 +67,7 @@ const UseHooks = () => {
 			width: "50%"
 		}
 	];
+
 	return (
 		<div className="card content-box">
 			<div className="date">
@@ -75,9 +76,11 @@ const UseHooks = () => {
 			</div>
 			<div className="auth">
 				<Space>
-					{BUTTONS.add && <Button type="primary">我是 Admin && User 能看到的按钮</Button>}
-					{BUTTONS.delete && <Button type="primary">我是 Admin 能看到的按钮</Button>}
-					{BUTTONS.edit && <Button type="primary">我是 User 能看到的按钮</Button>}
+					{BUTTONS.root && <Button type="primary">我是 超级管理员 能看到的按钮</Button>}
+					{BUTTONS.delete && <Button type="primary">我是 普通管理员 能看到的按钮</Button>}
+					{BUTTONS.add && BUTTONS.update && <Button type="primary">我是 普通用户 能看到的按钮</Button>}
+					{BUTTONS.add && <Button type="primary">我是 访客用户 能看到的按钮</Button>}
+					{BUTTONS.query && <Button type="primary">我是 临时用户 能看到的按钮</Button>}
 				</Space>
 			</div>
 			<Table bordered={true} dataSource={dataSource} columns={columns} />

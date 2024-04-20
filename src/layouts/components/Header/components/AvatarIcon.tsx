@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Avatar, Modal, Menu, Dropdown, message } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
+import logout from '@/api/modules/logout';
 import { useNavigate } from "react-router-dom";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
@@ -20,7 +21,7 @@ const AvatarIcon = (props: any) => {
 	const infoRef = useRef<ModalProps>(null);
 
 	// 退出登录
-	const logout = () => {
+	const logoutFunc = () => {
 		Modal.confirm({
 			title: "温馨提示 🧡",
 			icon: <ExclamationCircleOutlined />,
@@ -28,10 +29,12 @@ const AvatarIcon = (props: any) => {
 			okText: "确认",
 			cancelText: "取消",
 			onOk: () => {
-				setToken("");
-				setUserInfo(null);
-				message.success("退出登录成功！");
-				navigate("/login");
+				logout().then((res) => {
+					setToken("");
+					setUserInfo(null);
+					message.success("退出登录成功！");
+					navigate("/login");
+				})
 			}
 		});
 	};
@@ -49,18 +52,19 @@ const AvatarIcon = (props: any) => {
 					label: <span className="dropdown-item">个人信息</span>,
 					onClick: () => infoRef.current!.showModal({ name: 11 })
 				},
-				{
-					key: "3",
-					label: <span className="dropdown-item">修改密码</span>,
-					onClick: () => passRef.current!.showModal({ name: 11 })
-				},
+				// {
+				// 	key: "3",
+				// 	label: <span className="dropdown-item">修改密码</span>,
+				// 	onClick: () => passRef.current!.showModal({ name: 11 })
+				// },
 				{
 					type: "divider"
 				},
 				{
 					key: "4",
 					label: <span className="dropdown-item">退出登录</span>,
-					onClick: logout
+					danger: true,
+					onClick: logoutFunc
 				}
 			]}
 		></Menu>

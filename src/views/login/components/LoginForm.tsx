@@ -1,10 +1,11 @@
-import md5 from "js-md5";
 import { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Login } from "@/api/interface";
-import { reqLogin } from "@/api/modules/login";
+import { getPublicKey, reqLogin } from "@/api/modules/login";
 import { HOME_URL } from "@/config/config";
+import useSessionStorage from '@/hooks/useSessionStorage';
+import JSEncrypt from 'jsencrypt';
 import { connect } from "react-redux";
 import { setToken, setUserInfo } from "@/redux/modules/global/action";
 import { useTranslation } from "react-i18next";
@@ -22,18 +23,30 @@ const LoginForm = (props: any) => {
 	const onFinish = async (loginForm: Login.ReqLoginForm) => {
 		try {
 			setLoading(true);
-			// ************** loginForm.password = md5(loginForm.password); // md5加密方式，待完善，之后会搞成密文 http 通信传输
-			const res = await reqLogin(loginForm);
-			if (res.code !== 200) {
-				setTabsList([]);
-				message.error(res.message);
-			} else {
-				setToken(res.token);
-				setUserInfo(res.data);
-				setTabsList([]);
-				message.success("登录成功！");
-				navigate(HOME_URL);
-			}
+			// 获取公钥
+			getPublicKey().then(async (res) => {
+				if (res.code === 200) {
+					const { setSessionStorage } = useSessionStorage('publicKey');
+					setSessionStorage(res.data);
+					const encrypt = new JSEncrypt();
+					encrypt.setPublicKey(res.data);
+					// 使用服务端提供的公钥来加密 密码
+					const encrypted_pass = encrypt.encrypt(loginForm.password);
+					// 使用加密后的密码请求 reqLogin 登录接口
+					const response = await reqLogin({ username: loginForm.username, password: encrypted_pass })
+					if (response.code !== 200) {
+						setTabsList([]);
+						message.error(response.message || '账号或密码错误');
+					} else {
+						setLoading(false);
+						setToken(response.data?.access_token);
+						setUserInfo(response.data?.userInfo);
+						setTabsList([]);
+						message.success("登录成功，希望你能玩的开心哦！");
+						navigate(HOME_URL);
+					}
+				}
+			});
 		} finally {
 			setLoading(false);
 		}

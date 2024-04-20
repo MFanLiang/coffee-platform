@@ -6,9 +6,11 @@ import AssemblySize from "./components/AssemblySize";
 import Language from "./components/Language";
 import Theme from "./components/Theme";
 import Fullscreen from "./components/Fullscreen";
+import { connect } from "react-redux";
 import "./index.less";
 
-const LayoutHeader = () => {
+const LayoutHeader = (props: any) => {
+	const { userInfo } = props;
 	const { Header } = Layout;
 
 	return (
@@ -22,11 +24,14 @@ const LayoutHeader = () => {
 				<Language />
 				<Theme />
 				<Fullscreen />
-				<span className="username">Hooks</span>
+				<span className="username">
+					{userInfo.username.replace(userInfo.username[0], userInfo.username[0].toUpperCase())}
+				</span>
 				<AvatarIcon />
 			</div>
 		</Header>
 	);
 };
 
-export default LayoutHeader;
+const mapStateToProps = (state: any) => state.global;
+export default connect(mapStateToProps, null)(LayoutHeader);

@@ -47,6 +47,9 @@ dependencies:
   js-md5:
     specifier: ^0.7.3
     version: 0.7.3
+  jsencrypt:
+    specifier: 3.0.0-rc.1
+    version: 3.0.0-rc.1
   localforage:
     specifier: ^1.10.0
     version: 1.10.0
@@ -4838,6 +4841,10 @@ packages:
   /jsbn@1.1.0:
     resolution: {integrity: sha512-4bYVV3aAMtDTTu4+xsDYa6sy9GyJ69/amsu9sYF2zqjiEoZA5xJi3BrfX3uY+/IekIu7MwdObdbDWpoZdBv3/A==, tarball: https://registry.npmmirror.com/jsbn/-/jsbn-1.1.0.tgz}
     dev: true
+
+  /jsencrypt@3.0.0-rc.1:
+    resolution: {integrity: sha512-gcvGaqerlUJy1Kq6tNgPYteVEoWNemu+9hBe2CdsCIz4rVcwjoTQ72iD1W76/PRMlnkzG0yVh7nwOOMOOUfKmg==, tarball: https://registry.npmmirror.com/jsencrypt/-/jsencrypt-3.0.0-rc.1.tgz}
+    dev: false
 
   /jsesc@2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==, tarball: https://registry.npmmirror.com/jsesc/-/jsesc-2.5.2.tgz}

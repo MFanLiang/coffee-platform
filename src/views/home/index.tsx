@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import "./index.less";
 
 const Home = (props: any) => {
+
 	return (
 		<div className="home card">
 			<img src={welcome} alt="welcome" />

@@ -7,7 +7,12 @@ const useLocalStorage = () => {
     }
   };
 
-  /** 设置 locaStorage */
+  /**
+   * @description 存储localStorage
+   * @param {String} key Storage名称
+   * @param {string} value Storage值
+   * @returns void
+   */
   const setLocaStorage = (key: string, value?: string) => {
     if (!value) return null;
     window.localStorage.setItem(key, JSON.stringify(value));

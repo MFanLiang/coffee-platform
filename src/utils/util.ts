@@ -122,7 +122,7 @@ export const getBreadcrumbList = (path: string, menuList: Menu.MenuOptions[]) =>
 	} catch (e) {
 		return tempPath.map(item => item.title);
 	}
-};
+}
 
 /**
  * @description 双重递归 找出所有 面包屑 生成对象存到 redux 中，就不用每次都去递归查找了
@@ -138,7 +138,7 @@ export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]
 	};
 	menuList.forEach(item => loop(item));
 	return handleBreadcrumbList;
-};
+}
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
@@ -163,7 +163,7 @@ export const isType = (val: any) => {
 	if (val === null) return "null";
 	if (typeof val !== "object") return typeof val;
 	else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
-};
+}
 
 /**
  * @description 对象数组深克隆
@@ -185,7 +185,7 @@ export const deepCopy = <T>(obj: any): T => {
 		}
 	}
 	return newObj;
-};
+}
 
 /**
  * @description 生成随机数
@@ -196,4 +196,53 @@ export const deepCopy = <T>(obj: any): T => {
 export function randomNum(min: number, max: number): number {
 	let num = Math.floor(Math.random() * (min - max) + max);
 	return num;
-};
+}
+
+/**
+ * 利用闭包，用封闭的环境保存一个缓存的返回值，以及一个是否执行过的状态，控制传入的函数只执行一次
+ * @param func 用于控制执行的函数
+ * @returns () = viod
+ */
+export function once(func: any) {
+	let result: any;
+	return function () {
+		if (func) {
+			// @ts-ignore
+			result = func.apply(this, arguments);
+			func = null;
+		}
+		return result;
+	}
+}
+
+/**
+	 * 解析 token 工具方法
+	 * @param token token 加密口令
+	 * @returns "{exp: number, iat: number, id: string, username: string}"
+	 */
+export function decodeToken(token: any) {
+	try {
+		const tokenPayload = token.split('.')[1];
+		const decodedPayload = JSON.parse(atob(tokenPayload));
+		return decodedPayload;
+	} catch (error) {
+		console.error('Error decoding token:', error);
+		return null;
+	}
+}
+
+/**
+ * @description 时间戳转换为年月日时分秒格式
+ * @param timestamp 时间戳 【为10位需*1000，为13位不需*1000】
+ * @returns string
+ */
+export function timestampToTime(timestamp: number) {
+	let date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+	let Y = date.getFullYear() + '/';
+	let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '/';
+	let D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
+	let h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+	let m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+	let s = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds();
+	return Y + M + D + h + m + s;
+}

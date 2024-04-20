@@ -5,7 +5,7 @@ const useSessionStorage = (name: any) => {
     if (local !== null) {
       return JSON.parse(local)
     }
-    return null
+    return null;
   }
   /** 设置sessionStorage */
   const setSessionStorage = (item?: any) => {
@@ -17,7 +17,7 @@ const useSessionStorage = (name: any) => {
     return sessionStorage.removeItem(name)
   }
 
-  return [getSessionStorage, setSessionStorage, removeSessionStorage]
+  return { getSessionStorage, setSessionStorage, removeSessionStorage }
 };
 
 export default useSessionStorage;

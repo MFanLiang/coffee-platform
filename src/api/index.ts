@@ -1,4 +1,11 @@
-import axios, { InternalAxiosRequestConfig, AxiosError, AxiosResponse, AxiosInstance, AxiosRequestConfig } from "axios";
+import axios, {
+  InternalAxiosRequestConfig,
+  AxiosError,
+  AxiosResponse,
+  AxiosInstance,
+  AxiosRequestConfig,
+  isCancel
+} from "axios";
 import { message } from 'antd';
 import NProgress from "@/config/nprogress";
 import { store } from '@/redux';
@@ -40,11 +47,13 @@ class RequestNetworkHttp {
         // * 获取系统的 token 信息
         const sysToken: string = store.getState().global.token;
         // * 将当前请求添加到 pending 中
-        axiosCanceler.addPending(config);
+        // axiosCanceler.addPending(config);
 
         // * 如果当前请求不需要显示 loading,在api服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见reqLogin请求体
         config.headers!.noLoading || showFullScreenLoading();
-        config!.headers['Authorization'] = 'Bearer ' + sysToken;
+        if (!config.headers.noCarryAuth) {
+          config!.headers['Authorization'] = sysToken;
+        }
         return config;
       },
       (error: AxiosError) => {
@@ -60,35 +69,53 @@ class RequestNetworkHttp {
     this.service.interceptors.response.use(
       (response: AxiosResponse) => {
         const { data, config } = response;
+
         // * 进度条插件执行结束
         NProgress.done();
         // * 在请求结束后，移除本次请求(关闭loading)
-        axiosCanceler.removePending(config);
+        // axiosCanceler.removePending(config);
         tryHideFullScreenLoading();
-        // * 登录失效（code == 599）
-        if (data.code == ResultEnum.OVERDUE) {
-          store.dispatch(setToken(""));
-          message.error(data.msg);
-          window.location.hash = "/login";
-          return Promise.reject(data);
-        }
+
         // * 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
         if (data.code && data.code !== ResultEnum.SUCCESS) {
           message.error(data.msg);
           return Promise.reject(data);
         }
+
+        // 全局拦截掉 401 token 已过期的处理
+        if (data.code === ResultEnum.OVERDUE) {
+          store.dispatch(setToken(""));
+          message.error("您当前登录已失效，请重新登录")
+          window.location.hash = "/login";
+          return Promise.reject(data.message);
+        }
         return data;
       },
       async (error: AxiosError) => {
         const { response } = error;
+
+        // * 进度条插件执行结束
         NProgress.done();
         tryHideFullScreenLoading();
+        // * 请求时，若响应状态码 response.status 为 401，则默认处理登录失效
+        // * 登录失效（code == 401）
+        if (response) {
+          if (response.status == ResultEnum.OVERDUE) {
+            store.dispatch(setToken(""));
+            message.error("您当前登录已失效，请重新登录")
+            window.location.hash = "/login";
+            return Promise.reject(response.data);
+          }
+        }
+
         // 请求超时单独判断，请求超时没有 response
         if (error.message.indexOf("timeout") !== -1) message.error("请求超时，请稍后再试");
         // 根据响应的错误状态码，做不同的处理
         if (response) checkStatus(response.status);
         // 服务器结果都没有返回(可能服务器错误可能客户端断网) 断网处理:可以跳转到断网页面
         if (!window.navigator.onLine) window.location.hash = "/500";
+        // 通过 CanelToken 取消的请求不做任何处理
+        if (isCancel(error)) return Promise.reject(error);
         return Promise.reject(error);
       }
     )

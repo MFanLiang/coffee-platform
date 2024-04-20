@@ -23,7 +23,7 @@ const InfoModal = (props: Props) => {
 
 	const handleOk = () => {
 		setModalVisible(false);
-		message.success("修改用户信息成功 🎉🎉🎉");
+		// message.success("修改用户信息成功 🎉🎉🎉");
 	};
 
 	const handleCancel = () => {
@@ -74,14 +74,14 @@ const InfoModal = (props: Props) => {
 			{userInfoData === null ? <div>暂无用户信息</div> : (
 				<Descriptions title={null} bordered layout="vertical">
 					<Descriptions.Item label="姓  名" span={1}> {userInfoData.username} </Descriptions.Item>
-					<Descriptions.Item label="全  名" span={1}> {userInfoData.userFullName} </Descriptions.Item>
+					<Descriptions.Item label="全  名" span={1}> {userInfoData.user_full_name} </Descriptions.Item>
 					<Descriptions.Item label="手机号码" span={1}>
 						{userInfoData.tel}
 					</Descriptions.Item>
 					<Descriptions.Item label="状  态" span={3}>
 						<Badge status="success" text="激活" />
 					</Descriptions.Item>
-					<Descriptions.Item label="角  色">{ruleEnum[userInfoData.userRole]?.eleReactNode}</Descriptions.Item>
+					<Descriptions.Item label="角  色">{ruleEnum[userInfoData.user_role]?.eleReactNode}</Descriptions.Item>
 					<Descriptions.Item label="头像缩略图" span={2}>
 						<Avatar size="large" src={userInfoData.avatar || defaultAvatar} />
 					</Descriptions.Item>

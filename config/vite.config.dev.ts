@@ -25,8 +25,8 @@ const devConfiguration = (mode: any) => {
         },
         proxy: {
           '/api': {
-            // target: 'http://192.168.10.208:5050/', // 本地 windows 系统后端服务
-            target: 'http://116.63.42.17/api/', // 华为云服务器
+            target: 'http://192.168.10.208:5050/', // 本地 windows 系统后端服务
+            // target: 'http://116.63.42.17/api/', // 华为云服务器
             changeOrigin: true,
             rewrite: (path: any) => path.replace(/^\/api/, ''),
           }
