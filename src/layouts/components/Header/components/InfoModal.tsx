@@ -23,7 +23,7 @@ const InfoModal = (props: Props) => {
 
 	const handleOk = () => {
 		setModalVisible(false);
-		message.success("修改用户信息成功 🎉🎉🎉");
+		// message.success("修改用户信息成功 🎉🎉🎉");
 	};
 
 	const handleCancel = () => {
