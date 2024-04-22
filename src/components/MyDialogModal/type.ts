@@ -24,6 +24,8 @@ export interface IProps {
   fullScreenPower?: boolean;
   /** 是否显示全屏显示 */
   isFullScreen?: boolean;
+  /** 是否启用弹框拖拽移动 */
+  useMove?: boolean;
   /** 自定义底部按钮 */
   customFooterBtn?: () => JSX.Element;
   /** 指定用户单击“确定”按钮时将调用的函数 */

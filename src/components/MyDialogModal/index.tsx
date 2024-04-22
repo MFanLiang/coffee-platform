@@ -21,6 +21,7 @@ const MyDialogModal = forwardRef<myDialogModalRef, IProps>((props, _ref) => {
     isFullScreen = false,
     width = 800,
     height = 560,
+    useMove = false,
     customFooterBtn,
   } = props;
 
@@ -92,6 +93,14 @@ const MyDialogModal = forwardRef<myDialogModalRef, IProps>((props, _ref) => {
     }
     const { onCancel } = props;
     onCancel?.(e);
+    // 当弹框关闭动画执行完毕之后，恢复弹框居中位置(left: 50%, top: 50%)
+    let timer = setInterval(function () {
+      if (dialogModalRef.current) {
+        dialogModalRef.current.style.left = "50%";
+        dialogModalRef.current.style.top = "50%";
+      }
+      clearInterval(timer);
+    }, 0.8 * 950)
   };
 
   /** 单击“确定”按钮时将调用的函数 */
@@ -122,6 +131,31 @@ const MyDialogModal = forwardRef<myDialogModalRef, IProps>((props, _ref) => {
     setIsFullscreen(tempIsFullscreen);
   };
 
+  // * 处理拖动弹窗动作
+  const dialogModalRef = useRef<HTMLDivElement>(null);
+  const modalHeaderRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (useMove) {
+      modalHeaderRef.current?.addEventListener("mousedown", function (evt) {
+        if (dialogModalRef.current) {
+          let x = evt.pageX - dialogModalRef.current?.offsetLeft;
+          let y = evt.pageY - dialogModalRef.current?.offsetTop;
+          document.addEventListener("mousemove", move);
+          function move(evt: any) {
+            if (dialogModalRef.current) {
+              // 鼠标在页面内的坐标减去鼠标在弹框内的坐标就是弹窗距离页面边缘的距离
+              dialogModalRef.current.style.left = evt.pageX - x + "px";
+              dialogModalRef.current.style.top = evt.pageY - y + "px";
+            }
+          }
+          document.addEventListener("mouseup", function () {
+            document.removeEventListener("mousemove", move);
+          })
+        }
+      });
+    }
+  }, [useMove, modalHeaderRef.current, dialogModalRef.current]);
+
   return (
     <div
       tabIndex={1}
@@ -132,10 +166,12 @@ const MyDialogModal = forwardRef<myDialogModalRef, IProps>((props, _ref) => {
       <div
         className={classnames(style.dialogModal, isFullscreen ? style.fullDialogModal : null)}
         style={{ width, height }}
+        ref={dialogModalRef}
       >
         <div
+          ref={modalHeaderRef}
           className={classnames(style.dialogModalHeader, style[titlePosition])}
-          style={{ cursor: isFullscreen ? "default" : 'move' }}
+          style={{ cursor: isFullscreen || !useMove ? "default" : 'move' }}
         >
           <span>{title}</span>
           <span>
