@@ -32,6 +32,7 @@
 - :lollipop: 使用 自定义高阶组件 进行路由权限拦截（403 页面）、页面按钮权限配置
 - :cherries: 使用了 React-Router v6 路由懒加载配置、菜单手风琴模式、无限级菜单、多标签页、面包屑导航
 - :grapes: 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范
+- :grapes: 使用 jsencrypt 对密码加密处理，采用RSA非对称加密算法实现
 
 ### 四、安装使用步骤 :page_facing_up:
 
