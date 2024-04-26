@@ -22,7 +22,7 @@ interface MenuProps {
 // * redux-thunk
 export const getMenuListActionThunk = () => {
 	return async (dispatch: Dispatch<MenuProps>) => {
-		const res = await getMenuList();
+		const res = await getMenuList(0);
 		dispatch({
 			type: types.SET_MENU_LIST,
 			menuList: (res.data as Menu.MenuOptions[]) ?? []
@@ -32,7 +32,7 @@ export const getMenuListActionThunk = () => {
 
 // * redux-promise《async/await》
 export const getMenuListAction = async (): Promise<MenuProps> => {
-	const res = await getMenuList();
+	const res = await getMenuList(0);
 	return {
 		type: types.SET_MENU_LIST,
 		menuList: res.data ? res.data : []
@@ -41,7 +41,7 @@ export const getMenuListAction = async (): Promise<MenuProps> => {
 
 // * redux-promise《.then/.catch》
 export const getMenuListActionPromise = (): Promise<MenuProps> => {
-	return getMenuList().then(res => {
+	return getMenuList(0).then(res => {
 		return {
 			type: types.SET_MENU_LIST,
 			menuList: res.data ? res.data : []
