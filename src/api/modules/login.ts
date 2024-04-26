@@ -32,8 +32,8 @@ const getAuthorButtons = () => {
 /**
 * @name 获取菜单列表
 */
-const getMenuList = () => {
-	return server.get<any>(`${PORT1}/menu/list`, {}, { headers: { noLoading: false } });
+const getMenuList = (user_role: number) => {
+	return server.get<any>(`${PORT1}/menu/list`, {user_role}, { headers: { noLoading: false } });
 };
 
 export {

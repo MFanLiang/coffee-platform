@@ -18,7 +18,8 @@ const MyDialog = () => {
         keyboard={true}
         maskClosable={false}
         mask={true}
-        fullScreenPower={false}
+        useMove={false}
+        fullScreenPower={true}
         isFullScreen={false}
         onOk={(_e: React.MouseEvent<HTMLButtonElement>) => {
           setVisiable(false);
