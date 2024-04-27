@@ -108,6 +108,21 @@
     </div>
   </div>
   <script type="module" src="/src/main.tsx"></script>
+  <script>
+    (async () => {
+      const computedUse = () => {
+        let cache = 0;
+        for (let key in localStorage) {
+          if (localStorage.hasOwnProperty(key)) {
+            cache += localStorage.getItem(key).length
+          }
+        }
+        return (cache / 1024).toFixed(2);
+      };
+      const useCache = computedUse();
+      console.log("%c本地存储已使用容量：", "background: #000000; color: #00FF00", `${useCache}KB`);
+    })();
+  </script>
 </body>
 
 </html>
