@@ -6,17 +6,22 @@ export default {
 	},
 	placeholder: {
 		username: 'please input username',
-		password: 'please input password'
+		password: 'please input password',
+		inputSearch: 'Please enter a user name to search，support fuzzy search',
 	},
 	home: {
 		welcome: "Welcome"
 	},
+
+
 	tabs: {
 		more: "More",
 		closeCurrent: "Current",
 		closeOther: "Other",
 		closeAll: "All"
 	},
+
+	// 头部国际化区域
 	header: {
 		componentSize: "Component Size",
 		language: "Language",
@@ -29,5 +34,10 @@ export default {
 		personalData: "Personal Data",
 		changePassword: "Change Password",
 		logout: "Logout"
+	},
+
+	// 用户设置菜单国际化区域
+	userSetting: {
+		
 	}
 };

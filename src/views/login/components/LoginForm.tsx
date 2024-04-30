@@ -31,15 +31,15 @@ const LoginForm = (props: any) => {
 					const encrypt = new JSEncrypt();
 					encrypt.setPublicKey(res.data);
 					// 使用服务端提供的公钥来加密 密码
-					const encrypted_pass = encrypt.encrypt(loginForm.password);
+					const encryptedPass = encrypt.encrypt(loginForm.passWord);
 					// 使用加密后的密码请求 reqLogin 登录接口
-					const response = await reqLogin({ username: loginForm.username, password: encrypted_pass })
+					const response = await reqLogin({ userName: loginForm.userName, passWord: encryptedPass })
 					if (response.code !== 200) {
 						setTabsList([]);
 						message.error(response.message || '账号或密码错误');
 					} else {
 						setLoading(false);
-						setToken(response.data?.access_token);
+						setToken(response.data?.accessToken);
 						setUserInfo(response.data?.userInfo);
 						setTabsList([]);
 						message.success("登录成功，希望你能玩的开心哦！");
@@ -67,10 +67,10 @@ const LoginForm = (props: any) => {
 			size="large"
 			autoComplete="off"
 		>
-			<Form.Item name="username" rules={[{ required: true, message: "请输入用户名" }]}>
-				<Input placeholder="用户名：root/admin" prefix={<UserOutlined />} />
+			<Form.Item name="userName" rules={[{ required: true, message: "请输入用户名" }]}>
+				<Input placeholder="用户名：admin" prefix={<UserOutlined />} />
 			</Form.Item>
-			<Form.Item name="password" rules={[{ required: true, message: "请输入密码" }]}>
+			<Form.Item name="passWord" rules={[{ required: true, message: "请输入密码" }]}>
 				<Input.Password autoComplete="new-password" placeholder="密码：123456" prefix={<LockOutlined />} />
 			</Form.Item>
 			<Form.Item className="login-btn">

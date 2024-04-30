@@ -26,14 +26,14 @@ const reqLogin = (data: loginFormType) => {
 * @name 获取按钮权限
 */
 const getAuthorButtons = () => {
-	return server.get<Login.ResAuthButtons>(`${PORT1}/auth/buttons`, {}, { headers: { noLoading: false } });
+	return server.get<Login.ResAuthButtons>(`${PORT1}/auth/buttons`, {}, { headers: { noLoading: true } });
 };
 
 /**
 * @name 获取菜单列表
 */
-const getMenuList = (user_role: number) => {
-	return server.get<any>(`${PORT1}/menu/list`, {user_role}, { headers: { noLoading: false } });
+const getMenuList = (userRole: number) => {
+	return server.get<any>(`${PORT1}/menu/list`, {userRole}, { headers: { noLoading: true } });
 };
 
 export {

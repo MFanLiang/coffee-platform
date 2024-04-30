@@ -6,7 +6,8 @@ export default {
 	},
 	placeholder: {
 		username: '请输入用户名',
-		password: '请输入密码'
+		password: '请输入密码',
+		inputSearch: '请输入用户名来搜索，支持模糊搜索',
 	},
 	home: {
 		welcome: "欢迎使用"
@@ -29,5 +30,8 @@ export default {
 		personalData: "个人资料",
 		changePassword: "修改密码",
 		logout: "退出登录"
+	},
+	userSetting: {
+
 	}
 };

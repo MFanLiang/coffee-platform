@@ -1,8 +1,8 @@
 export interface loginFormType {
   /** 用户名 */
-  username: string;
+  userName: string;
   /** 密码 */
-  password: string;
+  passWord: string;
 }
 
 export interface userInfo {

@@ -25,7 +25,7 @@ const LayoutHeader = (props: any) => {
 				<Theme />
 				<Fullscreen />
 				<span className="username">
-					{userInfo.username.replace(userInfo.username[0], userInfo.username[0].toUpperCase())}
+					{userInfo.userName.replace(userInfo.userName[0], userInfo.userName[0].toUpperCase())}
 				</span>
 				<AvatarIcon />
 			</div>
