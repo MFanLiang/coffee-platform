@@ -12,15 +12,12 @@ export default {
 	home: {
 		welcome: "Welcome"
 	},
-
-
 	tabs: {
 		more: "More",
 		closeCurrent: "Current",
 		closeOther: "Other",
 		closeAll: "All"
 	},
-
 	// 头部国际化区域
 	header: {
 		componentSize: "Component Size",
@@ -35,9 +32,10 @@ export default {
 		changePassword: "Change Password",
 		logout: "Logout"
 	},
-
 	// 用户设置菜单国际化区域
 	userSetting: {
-		
+		add: "Add User",
+		search: "Search",
+		reset: "reset"
 	}
 };

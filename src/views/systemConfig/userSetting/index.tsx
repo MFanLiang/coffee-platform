@@ -8,11 +8,13 @@ import { useTranslation } from "react-i18next";
 import UserSettingModal from "./components/userSettingModal";
 import { Login } from "@/api/interface";
 import classNames from "classnames";
+import useAuthButtons from "@/hooks/useAuthButtons";
 import type { operateTypes } from './types';
 import style from './index.module.less';
 
 const UserSetting = (props: any) => {
   const { sysDictGroup, userInfo } = props;
+  const { BUTTONS } = useAuthButtons();
   const { t } = useTranslation();
   const userSettingModalRef = useRef<any>(null);
   const [userStrValue, setUserStrValue] = useState<string>('');
@@ -31,43 +33,31 @@ const UserSetting = (props: any) => {
 
   const handleDel = (operateType: operateTypes, rowData: Login.userInfoType) => { };
 
-  const ruleEnum: any = {
-    0: {
-      value: 0,
-      label: '超级管理员',
-      eleReactNode: <Tag color="#5bf11b"> 超级管理员 </Tag>,
-      disabled: false,
-    },
-    1: {
-      value: 1,
-      label: '系统管理员',
-      eleReactNode: <Tag color="magenta"> 系统管理员 </Tag>,
-      disabled: false,
-    },
-    2: {
-      value: 2,
-      label: '普通用户',
-      eleReactNode: <Tag color=""> 普通用户 </Tag>,
-      disabled: false,
-    },
-    3: {
-      value: 3,
-      label: '运营用户',
-      eleReactNode: <Tag color="orange"> 运营用户 </Tag>,
-      disabled: false,
-    },
-    4: {
-      value: 4,
-      label: '访客用户',
-      eleReactNode: <Tag color="gold"> 访客用户 </Tag>,
-      disabled: false,
-    },
-    5: {
-      value: 5,
-      label: '临时用户',
-      eleReactNode: <Tag color="lime"> 临时用户 </Tag>,
-      disabled: false,
-    },
+  /**
+   * @name 查找指定的用户角色枚举值
+   */
+  const findRoleToEnum = (val: number) => {
+    if (sysDictGroup.userRoleType.length === 0) return new Error('userRuleType is empty');
+    let ruleColor: any = {
+      0: "#2f8e06",
+      1: "#d3bf0d",
+      2: "#08e4d9",
+      3: "#f0810b",
+      4: "#911bf1"
+    };
+    const result = sysDictGroup.userRoleType.map((item: any, index: number) => {
+      return {
+        ...item,
+        eleReactNode: <Tag color={ruleColor[item.value]}> {item.label} </Tag>
+      }
+    });
+    let temp: any = null;
+    result.find((v: any) => {
+      if (v.value === val) {
+        temp = v.eleReactNode
+      }
+    });
+    return temp;
   };
 
   const columns: any[] = [
@@ -115,9 +105,7 @@ const UserSetting = (props: any) => {
       key: "userRole",
       width: 120,
       align: "center",
-      render: (_text: number) => {
-        return ruleEnum[_text]?.label
-      }
+      render: (_text: number) => findRoleToEnum(_text)
     },
     {
       title: "手机号码",
@@ -132,9 +120,7 @@ const UserSetting = (props: any) => {
       key: "status",
       width: 120,
       align: "center",
-      render: (_text: boolean) => {
-        return _text ? <Tag color="#0066FF">激活</Tag> : <Tag color="#FF0000">注销</Tag>
-      }
+      render: (_text: boolean) => _text ? <Tag color="#0066FF">激活</Tag> : <Tag color="#FF0000">注销</Tag>
     },
     {
       title: "创建时间",
@@ -142,9 +128,7 @@ const UserSetting = (props: any) => {
       key: "createTime",
       align: "center",
       width: 200,
-      render: (_text: string) => {
-        return moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
-      }
+      render: (_text: string) => moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
     },
     {
       title: "更新时间",
@@ -152,9 +136,7 @@ const UserSetting = (props: any) => {
       key: "updateTime",
       width: 200,
       align: "center",
-      render: (_text: string) => {
-        return moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
-      }
+      render: (_text: string) => moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
     },
     {
       title: '操作',
@@ -240,6 +222,7 @@ const UserSetting = (props: any) => {
           onPressEnter={() => handleUserStrPressEnter(userStrValue)}
         />
         <Button
+          title={t("userSetting.search")}
           className={classNames(style.searchBtn)}
           onClick={() => handleUserStrPressEnter(userStrValue)}
           type="primary"
@@ -247,22 +230,24 @@ const UserSetting = (props: any) => {
         >
           <SearchOutlined />
         </Button>
-        <Button className={classNames(style.resetBtn)} onClick={handleUserStrReset} type="primary" size="large">
+        <Button className={classNames(style.resetBtn)} title={t("userSetting.reset")} onClick={handleUserStrReset} type="primary" size="large">
           <span className={classNames("iconfont icon-Reset", style.resetIcon)} />
         </Button>
       </Input.Group>
 
-      <div className={style.operaterBtn}>
-        <Button
-          type="primary"
-          onClick={() => handleAdd("add")}
-          shape="default"
-          icon={<PlusOutlined />}
-          size="middle"
-        >
-          新增
-        </Button>
-      </div>
+      {BUTTONS.add &&
+        <div className={style.operaterBtn}>
+          <Button
+            type="primary"
+            onClick={() => handleAdd("add")}
+            shape="default"
+            icon={<PlusOutlined />}
+            size="middle"
+          >
+            {/* 新增用户按钮 */}
+            {t("userSetting.add")}
+          </Button>
+        </div>}
 
       <Table
         rowKey={(data) => data.id}
