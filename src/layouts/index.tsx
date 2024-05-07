@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 import { setAuthButtons } from "@/redux/modules/auth/action";
 import { updateCollapse } from "@/redux/modules/menu/action";
+import { setSysDictGroup } from "@/redux/modules/global/action";
+import { getAllDictRequest } from "@/api/modules/common";
 import { getAuthorButtons } from "@/api/modules/login";
 import { connect } from "react-redux";
 import LayoutMenu from "./components/Menu";
@@ -13,9 +15,11 @@ import "./index.less";
 
 const LayoutIndex = (props: any) => {
 	const { Sider, Content } = Layout;
-	const { isCollapse, updateCollapse, setAuthButtons } = props;
+	const { isCollapse, updateCollapse, setAuthButtons, setSysDictGroup } = props;
 
-	// 获取按钮权限列表
+	/**
+	 * @name 获取按钮权限列表
+	 */
 	const getAuthButtonsList = async () => {
 		const response = await getAuthorButtons();
 		if (response.code === 200) {
@@ -23,7 +27,9 @@ const LayoutIndex = (props: any) => {
 		}
 	};
 
-	// 监听窗口大小变化
+	/**
+	 * @name 监听窗口大小变化
+	 */
 	const listeningWindow = () => {
 		window.onresize = () => {
 			return (() => {
@@ -34,9 +40,22 @@ const LayoutIndex = (props: any) => {
 		};
 	};
 
+	/**
+	 * @name 读取系统所有字典数据枚举
+	 */
+	const readSysAllDictEnum = async () => {
+		await getAllDictRequest()
+			.then(res => {
+				if (res.code === 200) {
+					setSysDictGroup(res.data);
+				}
+			})
+	};
+
 	useEffect(() => {
 		listeningWindow();
 		getAuthButtonsList();
+		readSysAllDictEnum();
 	}, []);
 
 	return (
@@ -58,5 +77,5 @@ const LayoutIndex = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.menu;
-const mapDispatchToProps = { setAuthButtons, updateCollapse };
+const mapDispatchToProps = { setAuthButtons, updateCollapse, setSysDictGroup };
 export default connect(mapStateToProps, mapDispatchToProps)(LayoutIndex);

@@ -5,13 +5,13 @@ import logout from '@/api/modules/logout';
 import { useNavigate } from "react-router-dom";
 import { HOME_URL } from "@/config/config";
 import { connect } from "react-redux";
-import { setToken, setUserInfo } from "@/redux/modules/global/action";
+import { setToken, setUserInfo, setSysDictGroup } from "@/redux/modules/global/action";
 import PasswordModal from "./PasswordModal";
 import InfoModal from "./InfoModal";
 import defaultAvatar from "@/assets/images/avatar.png";
 
 const AvatarIcon = (props: any) => {
-	const { userInfo, setToken, setUserInfo } = props;
+	const { userInfo, setToken, setUserInfo, setSysDictGroup } = props;
 	const navigate = useNavigate();
 
 	interface ModalProps {
@@ -32,6 +32,7 @@ const AvatarIcon = (props: any) => {
 				logout().then((res) => {
 					setToken("");
 					setUserInfo(null);
+					setSysDictGroup(null);
 					message.success("退出登录成功！");
 					navigate("/login");
 				})
@@ -81,5 +82,5 @@ const AvatarIcon = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => state.global;
-const mapDispatchToProps = { setToken, setUserInfo };
+const mapDispatchToProps = { setToken, setUserInfo, setSysDictGroup };
 export default connect(mapStateToProps, mapDispatchToProps)(AvatarIcon);

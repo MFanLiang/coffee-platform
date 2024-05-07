@@ -30,3 +30,9 @@ export const setUserInfo = (userInfo: userInfoType | null) => ({
 	type: types.SET_USER_INFO,
 	userInfo
 });
+
+// * setSysDictGroup
+export const setSysDictGroup = (sysDictGroup: any) => ({
+	type: types.SET_SYSDICTGROUP,
+	sysDictGroup
+});

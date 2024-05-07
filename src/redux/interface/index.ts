@@ -22,6 +22,8 @@ export interface GlobalState {
 	token: string;
 	/** 用户基本信息 */
 	userInfo: any;
+	/** 系统字典数据(全部) */
+	sysDictGroup: any;
 	/** 系统尺寸 */
 	assemblySize: SizeType;
 	/** 系统语言 */
@@ -32,7 +34,7 @@ export interface GlobalState {
 
 /** userInfo Types */
 export interface userInfoType {
-	username: string;
+	userName: string;
 	id: string;
 	status: boolean;
 	avatar: string;

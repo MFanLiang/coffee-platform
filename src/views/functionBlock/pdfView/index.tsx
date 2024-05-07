@@ -6,7 +6,7 @@ const PdfView = () => {
     <iframe
       className="container-pdfbox"
       frameBorder="0"
-      src={`https://116.63.42.17/staticdata/pdfjs/web/viewer.html?file=https://116.63.42.17/staticdata/pdfFolder/pedoc.pdf`}
+      src={`https://xiaomenglovecoffee.top/staticdata/pdfjs/web/viewer.html?file=https://xiaomenglovecoffee.top/staticdata/pdfFolder/pedoc.pdf`}
     />
   )
 };

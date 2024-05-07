@@ -6,6 +6,7 @@ import * as types from "@/redux/mutation-types";
 const globalState: GlobalState = {
 	token: "",
 	userInfo: null,
+	sysDictGroup: null,
 	assemblySize: "middle",
 	language: "",
 	themeConfig: {
@@ -42,6 +43,9 @@ const global = (state: GlobalState = globalState, action: AnyAction) =>
 				break;
 			case types.SET_USER_INFO:
 				draftState.userInfo = action.userInfo
+				break;
+			case types.SET_SYSDICTGROUP:
+				draftState.sysDictGroup = action.sysDictGroup
 				break;
 			default:
 				return draftState;

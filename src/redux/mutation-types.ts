@@ -34,6 +34,9 @@ export const SET_THEME_CONFIG = "SET_THEME_CONFIG";
 /** 设置 userInfo */
 export const SET_USER_INFO = "SET_USER_INFO";
 
+/** 设置系统字典数据 */
+export const SET_SYSDICTGROUP = "SET_SYSDICTGROUP";
+
 /** 设置 tabsActiveKey 激活值 */
 export const SET_TABS_ACTIVE_KEY = "SET_TABS_ACTIVE_KEY";
 

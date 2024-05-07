@@ -52,10 +52,10 @@ export namespace Login {
 		updateTime: string;
 		/** 用户全名 */
 		userFullName: string;
-		/** 用户权限 */
-		userRole: number;
 		/** 用户名称 */
 		userName: string;
+		/** 用户权限 */
+		userRole: number;
 	}
 	export interface ResLogin {
 		/** 访问令牌 */
