@@ -1,3 +1,8 @@
+/**
+ * 使用方式示例
+ * import * as utils from "@/utils/index";
+ * utils.localGet() // 使用获取 localStorage 的工具函数
+ */
 import { RouteObject } from "@/routers/interface";
 
 /**
@@ -73,6 +78,54 @@ export const getOpenKeys = (path: string) => {
 };
 
 /**
+ * @description 获取 dom 元素节点
+ * @param {String} domById id所在的dom节点
+ * @returns elementNode | null
+ */
+export function getDomElement(domById: string) {
+	return typeof domById === "string" ? document.getElementById(domById) : null;
+}
+
+/**
+ * @description 数组去重方法01
+ * @param arr 要去重的数组
+ * @returns []
+ */
+export function unique1(arr: []) {
+	return [...new Set(arr)];
+}
+
+/**
+ * @description 数组去重方法02
+ * @param arr 要去重的数组
+ * @returns []
+ */
+export function unique2(arr: []) {
+	var obj: any = {};
+	return arr.filter(ele => {
+		if (!obj[ele]) {
+			obj[ele] = true;
+			return true;
+		}
+	})
+}
+
+/**
+ * @description 数组去重方法03
+ * @param arr 要去重的数组
+ * @returns []
+ */
+export function unique3(arr: []) {
+	var result: any = [];
+	arr.forEach(ele => {
+		if (result.indexOf(ele) == -1) {
+			result.push(ele)
+		}
+	})
+	return result;
+}
+
+/**
  * @description 递归查询对应的路由
  * @param {String} path 当前访问地址
  * @param {Array} routes 路由列表
@@ -122,7 +175,7 @@ export const getBreadcrumbList = (path: string, menuList: Menu.MenuOptions[]) =>
 	} catch (e) {
 		return tempPath.map(item => item.title);
 	}
-}
+};
 
 /**
  * @description 双重递归 找出所有 面包屑 生成对象存到 redux 中，就不用每次都去递归查找了
@@ -138,11 +191,11 @@ export const findAllBreadcrumb = (menuList: Menu.MenuOptions[]): { [key: string]
 	};
 	menuList.forEach(item => loop(item));
 	return handleBreadcrumbList;
-}
+};
 
 /**
  * @description 使用递归处理路由菜单，生成一维数组，做菜单权限判断
- * @param {Array} menuList 所有菜单列表
+ * @param {Array} routerList 所有菜单列表
  * @param {Array} newArr 菜单的一维数组
  * @return array
  */
@@ -163,7 +216,7 @@ export const isType = (val: any) => {
 	if (val === null) return "null";
 	if (typeof val !== "object") return typeof val;
 	else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
-}
+};
 
 /**
  * @description 对象数组深克隆
@@ -185,7 +238,7 @@ export const deepCopy = <T>(obj: any): T => {
 		}
 	}
 	return newObj;
-}
+};
 
 /**
  * @description 生成随机数
@@ -229,6 +282,22 @@ export function decodeToken(token: any) {
 		console.error('Error decoding token:', error);
 		return null;
 	}
+}
+
+/**
+ * @description 返回当前的时间（1970年01月01日）
+ * @returns 1970年01月01日23时59分59秒
+ */
+export function getDateTime() {
+	const zeroFill = (i: any) => i < 10 ? i = "0" + i : i;
+	let date = new Date();
+	let year = date.getFullYear();
+	let month = zeroFill(date.getMonth() + 1);
+	let day = zeroFill(date.getDate());
+	let hour = zeroFill(date.getHours());
+	let minute = zeroFill(date.getMinutes());
+	let second = zeroFill(date.getSeconds());
+	return "" + year + "年" + month + "月" + day + "日" + hour + "时" + minute + "分" + second + "秒";
 }
 
 /**

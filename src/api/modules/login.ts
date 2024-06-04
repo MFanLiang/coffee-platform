@@ -29,16 +29,8 @@ const getAuthorButtons = () => {
 	return server.get<Login.ResAuthButtons>(`${PORT1}/auth/buttons`, {}, { headers: { noLoading: true } });
 };
 
-/**
-* @name 获取菜单列表
-*/
-const getMenuList = () => {
-	return server.get<any>(`${PORT1}/menu/list`, {}, { headers: { noLoading: true } });
-};
-
 export {
 	getPublicKey,
 	reqLogin,
 	getAuthorButtons,
-	getMenuList
 };

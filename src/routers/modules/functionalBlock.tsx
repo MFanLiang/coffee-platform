@@ -58,7 +58,7 @@ const functionalBlock: Array<RouteObject> = [
       },
       {
         path: "/functionalBlock/drag-controler",
-        element: lazyLoad(React.lazy(() => import("@/views/functionBlock/DragControler/index"))),
+        element: lazyLoad(React.lazy(() => import("@/views/functionBlock/DragController/index"))),
         meta: {
           requiresAuth: true,
           title: "拖拽控制器",

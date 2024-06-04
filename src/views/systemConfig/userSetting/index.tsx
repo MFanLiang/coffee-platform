@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Table, Button, Input, Tag, Space, Image, message } from "antd";
+import type { ColumnsType } from 'antd/es/table';
 import moment from "moment";
 import { connect } from "react-redux";
 import { getAllUserInfo, searchFuzzyquery } from '@/api/modules/user';
@@ -9,7 +10,7 @@ import UserSettingModal from "./components/userSettingModal";
 import { Login } from "@/api/interface";
 import classNames from "classnames";
 import useAuthButtons from "@/hooks/useAuthButtons";
-import type { operateTypes } from './types';
+import type { operateTypes, DataType } from './types';
 import style from './index.module.less';
 
 const UserSetting = (props: any) => {
@@ -60,7 +61,7 @@ const UserSetting = (props: any) => {
     return temp;
   };
 
-  const columns: any[] = [
+  const columns: ColumnsType<DataType> = [
     {
       title: "序列",
       dataIndex: "ind",
@@ -128,7 +129,7 @@ const UserSetting = (props: any) => {
       key: "createTime",
       align: "center",
       width: 200,
-      render: (_text: string) => moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
+      render: (_text: string) => moment(_text).format("YYYY-MM-DD HH:mm:ss")
     },
     {
       title: "更新时间",
@@ -136,7 +137,7 @@ const UserSetting = (props: any) => {
       key: "updateTime",
       width: 200,
       align: "center",
-      render: (_text: string) => moment(_text).format("YYYY年MM月DD日 HH:mm:ss")
+      render: (_text: string) => moment(_text).format("YYYY-MM-DD HH:mm:ss")
     },
     {
       title: '操作',
@@ -175,7 +176,7 @@ const UserSetting = (props: any) => {
       setLoading(false);
     }).finally(() => {
       setLoading(false);
-    })
+    });
   };
 
   /**
@@ -250,7 +251,7 @@ const UserSetting = (props: any) => {
         </div>}
 
       <Table
-        rowKey={(data) => data.id}
+        rowKey={record => record.id}
         bordered={true}
         dataSource={dataSource}
         columns={columns}

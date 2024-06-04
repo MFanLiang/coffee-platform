@@ -5,7 +5,7 @@ import { findAllBreadcrumb, getOpenKeys, handleRouter, searchRoute } from "@/uti
 import { setMenuList } from "@/redux/modules/menu/action";
 import { setBreadcrumbList } from "@/redux/modules/breadcrumb/action";
 import { setAuthRouter } from "@/redux/modules/auth/action";
-import { getMenuList } from "@/api/modules/login";
+import { getMenuList } from "@/api/modules/menu";
 import { connect } from "react-redux";
 import type { MenuProps } from "antd";
 import * as Icons from "@ant-design/icons";

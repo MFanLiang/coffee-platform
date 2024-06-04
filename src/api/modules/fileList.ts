@@ -1,26 +1,23 @@
 import server from "@/api";
 import { PORT1 } from "@/api/config/servicePort";
 import { AxiosProgressEvent } from 'axios';
-
-interface responseType {
-  /** 自定义的状态码 */
-  code: number;
-  results: any;
-  imgUrl?: string[];
-  len?: number;
-  total?: number;
-  msg?: string;
-}
+import { ResultData } from "../interface";
 
 /** 获取 koa 服务后台所有图片文件 */
 const getKoaServerPicFile = () => {
-  return server.get(`${PORT1}/readimgsurl`)
+  // return server.get(`${PORT1}/readimgsurl`)
+  return server.service<any, ResultData>({
+    url: `${PORT1}/readimgsurl`,
+    method: "get",
+    responseEncoding: "utf-8",
+    responseType: "blob",
+  })
 };
 
 /** 上传单图片文件 */
-const simgleFileUpload = (formDataFile: FormData, uploadProgressCallback: (progressEvent: AxiosProgressEvent) => void) => {
-  return server.service<any, responseType>({
-    url: `${PORT1}/upload/simgle`,
+const singlePicUpload = (formDataFile: FormData, uploadProgressCallback: (progressEvent: AxiosProgressEvent) => void) => {
+  return server.service<any, ResultData>({
+    url: `${PORT1}/upload/singlePic`,
     method: 'POST',
     // url传参方法
     // params: { },
@@ -41,7 +38,41 @@ const simgleFileUpload = (formDataFile: FormData, uploadProgressCallback: (progr
   })
 };
 
+/**
+ * @name 上传单个文件
+ */
+const singleFileUpload = (formDataFile: FormData, uploadProgressCallback: (progressEvent: AxiosProgressEvent) => void) => {
+  return server.service<any, ResultData>({
+    url: `${PORT1}/upload/singleFile`,
+    method: 'POST',
+    data: formDataFile,
+    onUploadProgress(progressEvent) {
+      uploadProgressCallback(progressEvent);
+    },
+  });
+};
+
+/**
+ * @name 获取所有文件
+ */
+const getAllfilesList = () => {
+  return server.get(`${PORT1}/allFilesList`, {}, { headers: { noLoading: true } });
+};
+
+/**
+ * @name 查看文件
+ */
+const viewFileById = (id: string) => {
+  return server.get(
+    `${PORT1}/readFile`,
+    { id },
+    { headers: { noLoading: true }, responseType: "blob" });
+};
+
 export {
-  simgleFileUpload,
-  getKoaServerPicFile
+  singlePicUpload,
+  singleFileUpload,
+  getKoaServerPicFile,
+  getAllfilesList,
+  viewFileById
 };

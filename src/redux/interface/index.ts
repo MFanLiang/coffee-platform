@@ -75,8 +75,14 @@ export interface StudyReactState {
 	/** tabs 激活的项 */
 	tabsActiveKey: string;
 
-	/** 图片上传类型 【single 单一图片文件】【multiple 多个图片文件】 */
-	picUploadType: 'single' | 'multiple';
+	/**
+	 * @name 图片上传类型
+	 * @property picSingle 单一图片文件
+	 * @property picMultiple 多个图片文件
+	 * @property fileSingle
+	 * @property fileMultiple
+	*/
+	picUploadType: 'picSingle' | 'multiple' | 'fileSingle' | 'fileMultiple';
 }
 
 /* picSelector */

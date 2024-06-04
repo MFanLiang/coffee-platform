@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { message, Card } from 'antd';
 import classnames from 'classnames';
 import { fileToBlob } from '@/utils/FiileConversion';
-import { simgleFileUpload, getKoaServerPicFile } from '@/api/modules/fileList';
+import { singlePicUpload, getKoaServerPicFile } from '@/api/modules/fileList';
 import { AxiosProgressEvent } from 'axios';
 import styles from './index.module.less';
 import PicViewController from '@/components/PicViewController';
@@ -64,7 +64,7 @@ const SinglePicFile = () => {
     formData.append("fileType", fileSimgle.type);
     formData.append("file", fileSimgle);
     try {
-      const res = await simgleFileUpload(formData, uploadProgressCallback);
+      const res = await singlePicUpload(formData, uploadProgressCallback);
       if (res.code === 200) {
         messageApi.open({
           type: 'success',
@@ -83,8 +83,9 @@ const SinglePicFile = () => {
 
   // 读取服务器中所有图片在线路径地址
   const getServerAllImgUrl = async () => {
-    const res = await getKoaServerPicFile();
-    res && setNetUrl(res.data as any);
+    await getKoaServerPicFile().then(response => {
+      console.log('response :>> ', response);
+    })
   };
 
   useEffect(() => {

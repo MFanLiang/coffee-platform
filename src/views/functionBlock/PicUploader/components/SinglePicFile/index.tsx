@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { message, Space, Card, Popover } from 'antd';
-import { simgleFileUpload, getKoaServerPicFile } from '@/api/modules/fileList';
+import { singlePicUpload, getKoaServerPicFile } from '@/api/modules/fileList';
 import type { AxiosProgressEvent } from 'axios';
 import { fileToBlob } from '@/utils/FiileConversion';
 import classnames from 'classnames';
@@ -80,7 +80,6 @@ const SinglePicFile = () => {
   const uploadProgressCallback = (progressEvent: AxiosProgressEvent) => {
     console.log('progressEvent :>> ', progressEvent);
   };
-  const [messageApi, contextHolder] = message.useMessage();
   const uploadSimgleFileImg = async (fileSingleInfo: File) => {
     if (!fileSingleInfo) {
       alert('系统未检测到图片，请上传后重试！');
@@ -90,11 +89,11 @@ const SinglePicFile = () => {
     formData.append("fileName", fileSingleInfo.name);
     formData.append("fileSize", String(fileSingleInfo.size));
     formData.append("fileType", fileSingleInfo.type);
-    formData.append("file", fileSingleInfo);
+    formData.append("pic_sin", fileSingleInfo);
     try {
-      const res = await simgleFileUpload(formData, uploadProgressCallback);
+      const res = await singlePicUpload(formData, uploadProgressCallback);
       if (res.code === 200) {
-        messageApi.open({
+        message.open({
           type: 'success',
           content: '图片上传成功！',
         });
@@ -102,7 +101,7 @@ const SinglePicFile = () => {
         getServerAllImgUrl();
       }
     } catch (err) {
-      messageApi.open({
+      message.open({
         type: 'error',
         content: '图片上传失败，请检查网络或 Koa 服务开启状态',
       });
@@ -133,7 +132,7 @@ const SinglePicFile = () => {
                 style={{ display: 'none' }}
                 onChange={(evt) => receiveFile(evt)}
               />
-              <span className={classnames('iconfont icon-add', style.picAdd)}></span>
+              <span className={classnames('iconfont icon-add', style.picAdd)} />
             </label>
 
             <div className={style.circleBox}>
@@ -186,10 +185,9 @@ const SinglePicFile = () => {
         </Card>
 
         <Card hoverable title="图片预览区域">
-            
+
         </Card>
       </Space>
-      {contextHolder}
       <PicView visiable={visiable} setVisiable={setVisiable} singleImgInfo={singleImgInfo} />
     </React.Fragment>
   );

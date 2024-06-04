@@ -5,7 +5,7 @@ import * as types from "@/redux/mutation-types";
 
 const studyReact: StudyReactState = {
   tabsActiveKey: '',
-  picUploadType: 'single',
+  picUploadType: 'picSingle',
 }
 
 // 定义reducer
